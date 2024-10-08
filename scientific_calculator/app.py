@@ -1,5 +1,5 @@
 import sys
-from scientific_calculator.calculator import Calculator
+from calculator import Calculator
 
 
 def run_app():

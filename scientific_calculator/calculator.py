@@ -3,6 +3,9 @@ import math
 
 class Calculator:
 
+    menu = """Choose the math operation:\n\n0 - Addition\n1 - Subtraction\n2 - Multiplication\n3 - Division\n4 - Modulo
+5 - Raising to a power\n6 - Square root\n7 - Logarithm\n8 - Sine\n9 - Cosine\n10 - Tangent\n\nOr 'Q' to quit."""
+
     @staticmethod
     def _add(x: float, y: float) -> float:
         print(f"{x} + {y} =")
@@ -79,6 +82,7 @@ class Calculator:
             try:
                 value1 = float(input("First value: "))
                 value2 = float(input("Second value: "))
+
             except ValueError:
                 print("Must be a valid number.")
                 continue
@@ -116,6 +120,7 @@ class Calculator:
                     print("Square root is undefined for negative numbers.")
                     continue
                 return value
+
             except ValueError:
                 print("Must be a valid number.")
                 continue
@@ -128,9 +133,11 @@ class Calculator:
                 if input_type.lower() not in ["d", "r"]:
                     print("Invalid input.")
                     continue
+
                 degrees = True if input_type == "d" else False
                 angle = float(input("Input value: "))
                 return angle, degrees
+
             except ValueError:
                 print("Must be a valid number.")
                 continue

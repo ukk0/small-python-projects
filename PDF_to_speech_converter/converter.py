@@ -10,7 +10,6 @@ class PDFConverter:
         self.main_window = main_window
         self.main_window.title("PDF to Speech Converter")
         self.main_window.geometry("500x500")
-
         self.pdf_file = None
         self.text = ""
         self.engine = pyttsx3.init()
@@ -82,6 +81,7 @@ class PDFConverter:
         self.engine.setProperty('volume', volume)
 
     def start_speech_thread(self):
+        # TODO: Does not work as intended - this solution terminates the program whenever conversion ends or is ended.
         """
         Start the speech conversion in a separate thread.
         """
@@ -96,7 +96,7 @@ class PDFConverter:
 
         self.convert_button.config(state=tk.DISABLED)
         try:
-            # Runs the speech conversion in another thread to avoid blocking the GUI
+            # Runs the speech conversion in separate thread to avoid blocking the GUI
             speech_thread = threading.Thread(target=self.convert_to_speech)
             speech_thread.start()
 
@@ -105,11 +105,7 @@ class PDFConverter:
             self.convert_button.config(state=tk.NORMAL)
 
     def convert_to_speech(self):
-        """
-        Convert the extracted text to speech (runs in a separate thread).
-        """
         self.set_speech_properties()
-
         try:
             self.engine.say(self.text)
             self.engine.runAndWait()

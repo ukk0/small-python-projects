@@ -49,11 +49,29 @@ class UserManagerApp:
 
     def add_user(self):
         user_info = self.get_user_info_from_entries()
+
+        if not 0.5 < user_info["height"] < 2.5:
+            messagebox.showerror("Error", "Height must be between 0.5 meters and 2.5 meters.")
+            return
+
+        if not 20 < user_info["weight"] < 500:
+            messagebox.showerror("Error", "Weight must be between 20kg and 500kg.")
+            return
+
         response = requests.post(f"{BASE_URL}/user/", json=user_info)
         self.handle_response(response, "User added successfully")
 
     def update_user(self):
         user_info = self.get_user_info_from_entries()
+
+        if not 0.5 < user_info["height"] < 2.5:
+            messagebox.showerror("Error", "Height must be between 0.5 meters and 2.5 meters.")
+            return
+
+        if not 20 < user_info["weight"] < 500:
+            messagebox.showerror("Error", "Weight must be between 20kg and 500kg.")
+            return
+
         identifier = self.get_identifier()
         response = requests.patch(f"{BASE_URL}/user/{identifier}", json=user_info)
         self.handle_response(response, "User updated successfully")
@@ -68,7 +86,10 @@ class UserManagerApp:
         response = requests.get(f"{BASE_URL}/user/{identifier}")
         if response.status_code == 200:
             user = response.json()
-            messagebox.showinfo("User Info", f"Username: {user['username']}\nEmail: {user['email']}\nAge: {user['age']}\nSex: {user['sex']}\nWeight: {user['weight']}\nHeight: {user['height']}")
+            messagebox.showinfo("User Info", f"Username: {user['username']}\nEmail: {user['email']}\nAge: "
+                                             f"{user['age']}\nSex: {user['sex']}\nWeight: {user['weight']}\nHeight: "
+                                             f"{user['height']}"
+                                )
         else:
             messagebox.showerror("Error", response.json()["detail"])
 

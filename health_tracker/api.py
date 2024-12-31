@@ -16,7 +16,6 @@ class User(BaseModel):
 
 class UserUpdate(BaseModel):
     age: int = None
-    sex: str = None
     weight: float = None
     height: float = None
 
@@ -48,8 +47,8 @@ def update_user(identifier: str, user_update: UserUpdate):
     cursor = conn.cursor()
     try:
         cursor.execute(f'''
-            UPDATE users SET age=?, sex=?, weight=?, height=? WHERE username=? OR email=?
-        ''', (user_update.age, user_update.sex, user_update.weight, user_update.height, identifier, identifier))
+            UPDATE users SET age=?, weight=?, height=? WHERE username=? OR email=?
+        ''', (user_update.age, user_update.weight, user_update.height, identifier, identifier))
         conn.commit()
         if cursor.rowcount == 0:
             raise HTTPException(status_code=404, detail="User not found")

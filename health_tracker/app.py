@@ -12,7 +12,7 @@ def init_db():
 
 
 def start_fastapi():
-    # Running server in a separate thread
+    # Run server in a separate thread
     print("Starting FastAPI server...")
     uvicorn.run(fastapi_app, host="127.0.0.1", port=8000, log_level="info")
 

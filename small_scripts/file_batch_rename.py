@@ -25,5 +25,5 @@ def add_date_to_txt_files(directory: str):
 
 
 if __name__ == "__main__":
-    path = input("Target folder (absolute path): ")
+    path = '../resources/text_files'
     add_date_to_txt_files(path)
